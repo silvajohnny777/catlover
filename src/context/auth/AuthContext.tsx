@@ -39,14 +39,14 @@ const AuthProvider = ({ children, }: AuthContextProviderProps) => {
 
     useEffect(() => {
         
-        setUser(String(userId))
+        userId && setUser(String(userId))
 
     }, [userId])
 
     const signOut = () => {
 
-        setUser('')
         deleteCookie('user_id');
+        setUser('')
         push('/login')                
         
     }
