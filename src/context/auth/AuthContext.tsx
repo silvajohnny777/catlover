@@ -26,12 +26,12 @@ const AuthProvider = ({ children, }: AuthContextProviderProps) => {
 
         const userId = loginData.id
         setLoading(true)
-        setCookie('user_id', `${userId}`);
 
         setTimeout(() => {
             push('/feed')
             setUser(userId)
             setLoading(false)
+            setCookie('user_id', `${userId}`);
             
         }, 2000);
 
@@ -39,7 +39,11 @@ const AuthProvider = ({ children, }: AuthContextProviderProps) => {
 
     useEffect(() => {
         
-        userId && setUser(String(userId))
+        if(userId) { 
+            setUser(String(userId)) 
+        } else { 
+            signOut()
+        }
 
     }, [userId])
 
